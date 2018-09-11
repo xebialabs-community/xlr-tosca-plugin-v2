@@ -1,0 +1,13 @@
+.gradle
+.project
+.DS_Store
+.pydevproject
+.settings
+pom.xml
+build
+.idea
+build/
+.gradle/
+*.iml
+*.ipr
+*.iws
