@@ -3,9 +3,9 @@
 .DS_Store
 .pydevproject
 .settings
-pom.xml
-build
+.vscode
 .idea
+bin/
 build/
 .gradle/
 *.iml

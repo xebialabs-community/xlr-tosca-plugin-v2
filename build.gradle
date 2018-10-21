@@ -2,6 +2,8 @@ import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
   id "com.github.hierynomus.license" version "0.14.0"
+  id "com.github.hierynomus.jython" version "0.8.0"
+  id "com.github.johnrengelman.shadow" version "4.0.1"
   id 'nebula.release' version '6.0.0'
 }
 repositories {
@@ -12,30 +14,32 @@ repositories {
     }
 }
 
-def apiVersion = '2018.3.0'
+version = '2.0.0'
+def apiVersion = '2018.5.0'
+def artifactId = "xld-tosca-plugin"
 
 apply plugin: "com.github.hierynomus.license"
 apply plugin: 'java'
-apply plugin: 'idea'
+apply plugin: 'maven'
 
 dependencies {
   compile 'com.google.guava:guava:18.0'
-  compile "junit:junit:4.11"
+  compile fileTree(dir: 'lib', include: ['*.jar'])
+
+  compileTest "junit:junit:4.11"
 }
 
-if (!project.hasProperty('release.scope')) {
-  project.ext['release.scope'] = 'patch'
-}
-
-if (!project.hasProperty('release.useLastTag')) {
-  project.ext['release.useLastTag'] = true
-}
-
-processResources.configure {
+processResources {
   filter ReplaceTokens, tokens: [
-    'project.version': version.toString(),
-    'project.name'   : rootProject.name
+    'project.version': project.version.toString(),
+    'artifactId': artifactId
   ]
+}
+
+shadowJar {
+  dependencies {
+      exclude(dependency('junit:junit:.*'))
+   }
 }
 
 license {
