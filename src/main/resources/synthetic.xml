@@ -18,7 +18,6 @@
        #######################################################################################################################
     -->
     <type type="tosca.Server" extends="configuration.HttpConnection">
-        <property name="mode_for" label="Mode" default="local" description="Enter 'local' or 'distributed' as appropriate" /> <!-- TODO: can this be a list? -->
     </type>
 
     <!--
@@ -37,9 +36,9 @@
         <property name="workspace" category="input" description="Workspace name where test event exists." default="Test" required="true"/>
 		<property name="testEventId" category="input" description="ID of the test event to be executed" required="true"/>
 
-        <property name="result_type" category="input" label="Result Type" kind="text" default="Default" required="false" />
-        <property name="polling_interval" category="input" label="Polling Interval" kind="number" default="300000" />
-        <property name="client_timeout" category="input" label="Timeout" kind="number" default="10800000" />
+        <property name="result_type" category="input" label="Result Type" kind="string" default="Default" required="false" />
+        <property name="polling_interval" category="input" label="Polling Interval" kind="integer" default="300000" />
+        <property name="client_timeout" category="input" label="Timeout" kind="integer" default="10800000" />
         <property name="consider_execution_result" category="input" label="Consider Exec Result" kind="boolean" default="false" />
     </type>
 

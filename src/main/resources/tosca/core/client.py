@@ -22,30 +22,28 @@ class ToscaClient(object):
 
     @staticmethod
     def new_instance(container):
-        return ToscaClient(container.url, container.username, container.password, container.mode_for)
+        return ToscaClient(container.url, container.username, container.password)
 
-    def __init__(self, url, username, password, mode_for):
+    def __init__(self, url, username, password):
         self.url = url
         self.username = username
         self.password = password
-        self.mode_for = mode_for
 
         # create dispatcher like this code from main.java
         # unfortunately I don't think we can save dispatcher and reuse for 'execute'.  Some options, e.g. result_type, 
         # are not (and shouldn't be) known here.
-        args = self._create_options('todo: path-to-result', self.mode_for, 'Default', self.username, self.password, self.url, False)
+        args = self._create_options('todo: path-to-result', 'Default', self.username, self.password, self.url, False)
 
         options = Options(args);
         dispatcher = AbstractDispatcher.createDispatcher(options);
         dispatcher.Connect();
         dispatcher.ShowDetails();
-        # dispatcher.Execute();
 
 
     def execute(self, result_type, polling_interval, client_timeout, consider_execution_result):
         # TODO: I don't know how the other parameters are used
         # TODO: I don't know where the 'workspace' and 'test event id' are applied (see existing plugin https://github.com/xebialabs-community/xlr-tosca-plugin/blob/master/src/main/resources/tosca/executeTestEvent.py)
-        args = self._create_options('todo: path-to-result', self.mode_for, 'Default', self.username, self.password, self.url, consider_execution_result)
+        args = self._create_options('todo: path-to-result', 'Default', self.username, self.password, self.url, consider_execution_result)
 
         options = Options(args);
         dispatcher = AbstractDispatcher.createDispatcher(options);
@@ -54,24 +52,24 @@ class ToscaClient(object):
         dispatcher.Execute();
 
 
-    def _create_options(self, path_to_result, mode_for, result_type, username, password, url, consider_execution_result):
+    def _create_options(self, path_to_result, result_type, username, password, url, consider_execution_result):
         args = []
 
-        args.append('r')
+        args.append('-r')
         args.append(path_to_result)
-        args.append('m')
-        args.append(mode_for)
-        args.append('t')
+        args.append('-m')
+        args.append('distributed')
+        args.append('-t')
         args.append(result_type)
-        # case 'c': 
+        # case 'c':                     not used
         # setConfigPath(value);
-        args.append('l')
+        args.append('-l')
         args.append(username)
-        args.append('p')
+        args.append('-p')
         args.append(password)
-        args.append('e')
+        args.append('-e')
         args.append(url)
-        args.append('x')
+        args.append('-x')
         args.append(consider_execution_result)
 
         return args
