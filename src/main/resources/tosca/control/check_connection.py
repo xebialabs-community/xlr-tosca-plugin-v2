@@ -11,9 +11,9 @@
 from tosca.core.client import ToscaClient
 
 def process(task_vars):
-    server = task_vars['thisCi']
+    server = task_vars['configuration']
 
-    # This will fail if the OpenStack server cannot be reached, if authentication fails, or if needed services are unavailable.
+    # This will fail if the Tosca server cannot be reached or if authentication fails
     ToscaClient.new_instance(server)
 
     print "Done"

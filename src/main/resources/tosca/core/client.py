@@ -15,8 +15,8 @@ import base64
 import httplib
 import ssl
 
-import com.tricentis.continuousintegration.toscacijavaclient.AbstractDispatcher
-import com.tricentis.continuousintegration.toscacijavaclient.Options
+from com.tricentis.continuousintegration.toscacijavaclient import AbstractDispatcher
+from com.tricentis.continuousintegration.toscacijavaclient import Options
 
 class ToscaClient(object):
 
@@ -32,24 +32,22 @@ class ToscaClient(object):
         # create dispatcher like this code from main.java
         # unfortunately I don't think we can save dispatcher and reuse for 'execute'.  Some options, e.g. result_type, 
         # are not (and shouldn't be) known here.
-        args = self._create_options('todo: path-to-result', 'Default', self.username, self.password, self.url, False)
+        args = self._create_options('/tmp/xlr/fixme', 'Junit', self.username, self.password, self.url, False)
 
-        options = Options(args);
-        dispatcher = AbstractDispatcher.createDispatcher(options);
-        dispatcher.Connect();
-        dispatcher.ShowDetails();
+        options = Options(args)
+        dispatcher = AbstractDispatcher.createDispatcher(options)
+        dispatcher.connect()
 
 
     def execute(self, result_type, polling_interval, client_timeout, consider_execution_result):
         # TODO: I don't know how the other parameters are used
         # TODO: I don't know where the 'workspace' and 'test event id' are applied (see existing plugin https://github.com/xebialabs-community/xlr-tosca-plugin/blob/master/src/main/resources/tosca/executeTestEvent.py)
-        args = self._create_options('todo: path-to-result', 'Default', self.username, self.password, self.url, consider_execution_result)
+        args = self._create_options('/tmp/xlr/fixme', result_type, self.username, self.password, self.url, consider_execution_result)
 
-        options = Options(args);
-        dispatcher = AbstractDispatcher.createDispatcher(options);
-        dispatcher.Connect();
-        dispatcher.ShowDetails();
-        dispatcher.Execute();
+        options = Options(args)
+        dispatcher = AbstractDispatcher.createDispatcher(options)
+        dispatcher.connect()
+        dispatcher.execute()
 
 
     def _create_options(self, path_to_result, result_type, username, password, url, consider_execution_result):
