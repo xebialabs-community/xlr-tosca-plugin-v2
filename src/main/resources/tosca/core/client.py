@@ -8,12 +8,9 @@
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-import yaml
-import json
-import itertools
-import base64
-import httplib
-import ssl
+import os
+import time
+import datetime
 
 from com.tricentis.continuousintegration.toscacijavaclient import AbstractDispatcher
 from com.tricentis.continuousintegration.toscacijavaclient import Options
@@ -29,38 +26,49 @@ class ToscaClient(object):
         self.username = username
         self.password = password
 
+        self.workdir = self._create_working_directory()
+        self.config_filename = '%s/testConfiguration.xml' % self.workdir
+        self.result_filename = '%s/result.xml' % self.workdir
+
         # create dispatcher like this code from main.java
         # unfortunately I don't think we can save dispatcher and reuse for 'execute'.  Some options, e.g. result_type, 
         # are not (and shouldn't be) known here.
-        args = self._create_options('/tmp/xlr/fixme', 'Junit', self.username, self.password, self.url, False)
+        args = self._create_options('Junit', self.username, self.password, self.url, False)
 
         options = Options(args)
         dispatcher = AbstractDispatcher.createDispatcher(options)
         dispatcher.connect()
 
 
-    def execute(self, result_type, polling_interval, client_timeout, consider_execution_result):
-        # TODO: I don't know how the other parameters are used
-        # TODO: I don't know where the 'workspace' and 'test event id' are applied (see existing plugin https://github.com/xebialabs-community/xlr-tosca-plugin/blob/master/src/main/resources/tosca/executeTestEvent.py)
-        args = self._create_options('/tmp/xlr/fixme', result_type, self.username, self.password, self.url, consider_execution_result)
+    def execute(self, result_type, polling_interval, client_timeout, consider_execution_result, test_configuration):
+        # write config file
+        with open(self.config_filename, "w") as text_file:
+            text_file.write(test_configuration)
+
+        args = self._create_options(result_type, self.username, self.password, self.url, consider_execution_result)
 
         options = Options(args)
         dispatcher = AbstractDispatcher.createDispatcher(options)
         dispatcher.connect()
         dispatcher.execute()
 
+        # read result file and return
+        with open(self.result_filename, 'r') as myfile:
+            results = myfile.read()
 
-    def _create_options(self, path_to_result, result_type, username, password, url, consider_execution_result):
+        return results
+
+    def _create_options(self, result_type, username, password, url, consider_execution_result):
         args = []
 
         args.append('-r')
-        args.append(path_to_result)
+        args.append(self.result_filename)
         args.append('-m')
         args.append('distributed')
         args.append('-t')
         args.append(result_type)
-        # case 'c':                     not used
-        # setConfigPath(value);
+        args.append('-c')
+        args.append(self.config_filename)
         args.append('-l')
         args.append(username)
         args.append('-p')
@@ -71,3 +79,13 @@ class ToscaClient(object):
         args.append(consider_execution_result)
 
         return args
+
+    def _create_working_directory(self):
+        ts = time.time()
+        st = datetime.datetime.fromtimestamp(ts).strftime('%Y%m%dT%H%M%S.%f')
+
+        workdir = 'work/tosca-%s' % st
+
+        os.makedirs(workdir)
+
+        return workdir

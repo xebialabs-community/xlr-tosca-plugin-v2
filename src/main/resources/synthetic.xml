@@ -29,9 +29,9 @@
     <type type="tosca.Execute" extends="xlrelease.PythonScript">
         <property name="iconLocation" hidden="true" default="tosca-icon.png"/>
         <property name="taskColor" hidden="true" default="#2666ae" />
-        <property name="scriptLocation" required="false" hidden="true" default="tosca/control/check_connection.py" />
+        <property name="scriptLocation" required="false" hidden="true" default="tosca/control/execute_test.py" />
 
-        <property name="toscaServer" category="input" label="Server" referenced-type="tosca.Server" kind="ci"/>
+        <property name="server" category="input" label="Server" referenced-type="tosca.Server" kind="ci"/>
         <property name="username" category="input" required="false" description="Override the global server username if necessary" />
         <property name="password" category="input" password="true" required="false" description="Override the global server password if necessary" />
 
@@ -42,6 +42,8 @@
         <property name="consider_execution_result" category="input" label="Consider Exec Result" kind="boolean" default="false" description="Select if you want test failure to fail the task." />
         <property name="polling_interval" category="input" label="Polling Interval" kind="integer" default="300000" required="false" />
         <property name="client_timeout" category="input" label="Timeout" kind="integer" default="10800000" required="false" />
+
+        <property name="test_results" description="Test results returned by Tosca server" category="output" required="false"/>
     </type>
 
 </synthetic>
