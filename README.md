@@ -35,3 +35,9 @@ What about this... https://github.com/xebialabs-community/xlr-tosca-plugin
 
 # Usage #
 
+# Developers #
+
+Build and package the plugins with...
+```
+./gradlew shadowJar
+```
