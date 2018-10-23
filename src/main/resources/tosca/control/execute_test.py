@@ -16,10 +16,12 @@ def process(task_vars):
     # This will fail if the Tosca server cannot be reached or if authentication fails
     client = ToscaClient.new_instance(task_vars['server'])
 
-    client.execute(task_vars['result_type'], task_vars['polling_interval'], task_vars['client_timeout'], task_vars['consider_execution_result'], task_vars['test_configuration'])
+    results = client.execute(task_vars['result_type'], task_vars['polling_interval'], task_vars['client_timeout'], task_vars['consider_execution_result'], task_vars['test_configuration'])
 
     print "Done"
 
+    return results
+
 
 if __name__ == '__main__' or __name__ == '__builtin__':
-    process(locals())
+    test_results = process(locals())
