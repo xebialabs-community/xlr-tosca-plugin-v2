@@ -11,9 +11,7 @@
 from tosca.core.client import ToscaClient
 
 def process(task_vars):
-    # config = task_vars['configuration']
 
-    # This will fail if the Tosca server cannot be reached or if authentication fails
     client = ToscaClient.new_instance(task_vars['server'])
 
     results = client.execute(task_vars['result_type'], task_vars['polling_interval'], task_vars['client_timeout'], task_vars['consider_execution_result'], task_vars['test_configuration'])

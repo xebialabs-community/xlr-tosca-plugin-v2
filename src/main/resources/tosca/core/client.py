@@ -50,7 +50,7 @@ class ToscaClient(object):
         dispatcher.Execute()
 
         # read result file and return
-        print "Writing results to '%s'" % self.result_filename
+        print "Reading results from '%s'" % self.result_filename
         with open(self.result_filename, 'r') as myfile:
             results = myfile.read()
         print "Complete..."

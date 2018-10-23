@@ -46,7 +46,7 @@
         <property name="polling_interval" category="input" label="Polling Interval" kind="integer" default="300000" required="false" />
         <property name="client_timeout" category="input" label="Timeout" kind="integer" default="10800000" required="false" />
 
-        <property name="test_results" description="Test results returned by Tosca server" category="output" required="false"/>
+        <property name="test_results" category="output" label="Test Results" description="Test results returned by Tosca server" required="false"/>
     </type>
 
 </synthetic>
