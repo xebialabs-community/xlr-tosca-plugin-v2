@@ -12,7 +12,7 @@ import os
 import time
 import datetime
 
-from com.tricentis.continuousintegration.toscacijavaclient import AbstractDispatcher
+from com.tricentis.continuousintegration.toscacijavaclient import DexDispatcher
 from com.tricentis.continuousintegration.toscacijavaclient import Options
 
 class ToscaClient(object):
@@ -31,57 +31,66 @@ class ToscaClient(object):
         self.config_filename = '%s/testConfiguration.xml' % self.workdir
         self.result_filename = '%s/result.xml' % self.workdir
 
-        # create dispatcher like this code from main.java
-        # unfortunately I don't think we can save dispatcher and reuse for 'execute'.  Some options, e.g. result_type, 
-        # are not (and shouldn't be) known here.
-        args = self._create_options('Junit', self.username, self.password, self.url, False)
-
-        print "The args are - ", args
-        print "Args type is ", type(args)
-
-        options = Options(args)
-        print "The options have been created and are ", options
-        dispatcher = AbstractDispatcher.createDispatcher(options)
-        dispatcher.connect()
-
 
     def execute(self, result_type, polling_interval, client_timeout, consider_execution_result, test_configuration):
+        if not test_configuration:
+            raise Exception('Test Configuration cannot be empty.')
+
         # write config file
+        print "Writing test config to '%s'" % self.config_filename
         with open(self.config_filename, "w") as text_file:
             text_file.write(test_configuration)
+        print "Complete..."
 
         args = self._create_options(result_type, self.username, self.password, self.url, consider_execution_result)
 
         options = Options(args)
-        dispatcher = AbstractDispatcher.createDispatcher(options)
-        dispatcher.connect()
-        dispatcher.execute()
+        dispatcher = DexDispatcher.createDispatcher(options)
+        dispatcher.Connect()
+        dispatcher.Execute()
 
         # read result file and return
+        print "Writing results to '%s'" % self.result_filename
         with open(self.result_filename, 'r') as myfile:
             results = myfile.read()
+        print "Complete..."
 
         return results
+
 
     def _create_options(self, result_type, username, password, url, consider_execution_result):
         args = []
 
-        args.append('-r')
-        args.append(str(self.result_filename))
         args.append('-m')
         args.append('distributed')
-        args.append('-t')
-        args.append(str(result_type))
-        args.append('-c')
-        args.append(str(self.config_filename))
-        args.append('-l')
-        args.append(str(username))
-        args.append('-p')
-        args.append(str(password))
-        args.append('-e')
-        args.append(str(url))
-        args.append('-x')
-        args.append(str(consider_execution_result))
+
+        if self.result_filename:
+            args.append('-r')
+            args.append(str(self.result_filename))
+
+        if result_type:
+            args.append('-t')
+            args.append(str(result_type))
+
+        if self.config_filename:
+            args.append('-c')
+            args.append(str(self.config_filename))
+
+        if username:
+            args.append('-l')
+            args.append(str(username))
+
+        if password:
+            args.append('-p')
+            args.append(str(password))
+
+        if url:
+            args.append('-e')
+            args.append(str(url))
+
+        if consider_execution_result:
+            args.append('-x')
+            args.append(str(consider_execution_result))
 
         return args
 

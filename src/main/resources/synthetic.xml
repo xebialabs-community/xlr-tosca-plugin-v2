@@ -18,7 +18,10 @@
        #######################################################################################################################
     -->
     <type type="tosca.Server" extends="configuration.HttpConnection">
-        <property name="scriptLocation" required="false" hidden="true" default="tosca/control/check_connection.py" />
+        <!-- 
+        No test connection script is defined because the tosca java client library wants a test configuration to parse before 
+        making a call to the server.
+        -->
     </type>
 
     <!--
