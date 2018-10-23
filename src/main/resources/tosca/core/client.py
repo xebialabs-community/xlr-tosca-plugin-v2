@@ -19,7 +19,8 @@ class ToscaClient(object):
 
     @staticmethod
     def new_instance(container):
-        return ToscaClient(container.url, container.username, container.password)
+        print "in new_instance, url = ", container["url"]
+        return ToscaClient(container["url"], container["username"], container["password"])
 
     def __init__(self, url, username, password):
         self.url = url
@@ -35,7 +36,11 @@ class ToscaClient(object):
         # are not (and shouldn't be) known here.
         args = self._create_options('Junit', self.username, self.password, self.url, False)
 
+        print "The args are - ", args
+        print "Args type is ", type(args)
+
         options = Options(args)
+        print "The options have been created and are ", options
         dispatcher = AbstractDispatcher.createDispatcher(options)
         dispatcher.connect()
 
@@ -62,21 +67,21 @@ class ToscaClient(object):
         args = []
 
         args.append('-r')
-        args.append(self.result_filename)
+        args.append(str(self.result_filename))
         args.append('-m')
         args.append('distributed')
         args.append('-t')
-        args.append(result_type)
+        args.append(str(result_type))
         args.append('-c')
-        args.append(self.config_filename)
+        args.append(str(self.config_filename))
         args.append('-l')
-        args.append(username)
+        args.append(str(username))
         args.append('-p')
-        args.append(password)
+        args.append(str(password))
         args.append('-e')
-        args.append(url)
+        args.append(str(url))
         args.append('-x')
-        args.append(consider_execution_result)
+        args.append(str(consider_execution_result))
 
         return args
 

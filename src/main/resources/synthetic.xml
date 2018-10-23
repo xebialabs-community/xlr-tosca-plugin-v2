@@ -38,7 +38,7 @@
         <property name="workspace" category="input" kind="string" label="Workspace" description="Workspace name where test events exist." default="Test" required="true"/>
 		<property name="test_configuration" category="input" kind="string" size="large" label="Test Configuration" description="Enter the test configuration to be executed" required="true"/>
 
-        <property name="result_type" category="input" label="Result Type" kind="string" default="Junit" required="false" label="Result Type" description="Enter 'Junit' or 'Default' for result type" />
+        <property name="result_type" category="input" label="Result Type" kind="string" default="Junit" required="false" description="Enter 'Junit' or 'Default' for result type" />
         <property name="consider_execution_result" category="input" label="Consider Exec Result" kind="boolean" default="false" description="Select if you want test failure to fail the task." />
         <property name="polling_interval" category="input" label="Polling Interval" kind="integer" default="300000" required="false" />
         <property name="client_timeout" category="input" label="Timeout" kind="integer" default="10800000" required="false" />
