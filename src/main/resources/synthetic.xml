@@ -38,13 +38,18 @@
         <property name="username" category="input" required="false" description="Override the global server username if necessary" />
         <property name="password" category="input" password="true" required="false" description="Override the global server password if necessary" />
 
-        <property name="workspace" category="input" kind="string" label="Workspace" description="Workspace name where test events exist." default="Test" required="true"/>
-		<property name="test_configuration" category="input" kind="string" size="large" label="Test Configuration" description="Enter the test configuration to be executed" required="true"/>
+        <property name="test_configuration" category="input" kind="string" size="large" label="Test Configuration" description="Enter the test configuration to be executed" required="true"/>
 
-        <property name="result_type" category="input" label="Result Type" kind="string" default="Junit" required="false" description="Enter 'Junit' or 'Default' for result type" />
+        <property name="result_type" category="input" kind="enum" label="Result Type" required="false">
+            <enum-values>
+                <value>Junit</value>
+                <value>Default</value>
+            </enum-values>
+        </property>
+
         <property name="consider_execution_result" category="input" label="Consider Exec Result" kind="boolean" default="false" description="Select if you want test failure to fail the task." />
-        <property name="polling_interval" category="input" label="Polling Interval" kind="integer" default="300000" required="false" />
-        <property name="client_timeout" category="input" label="Timeout" kind="integer" default="10800000" required="false" />
+        <property name="polling_interval" category="input" label="Polling Interval in Seconds" kind="integer" default="300" required="false" />
+        <property name="client_timeout" category="input" label="Timeout in Seconds" kind="integer" default="10800" required="false" />
 
         <property name="test_results" category="output" label="Test Results" description="Test results returned by Tosca server" required="false"/>
     </type>

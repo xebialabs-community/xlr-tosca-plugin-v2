@@ -18,7 +18,15 @@ def process(task_vars):
 
     print "Done"
 
+    print "The results are ", results
+
+    print "Running testResultsPassed"
+    testResultsPassed(results, task_vars['test_configuration'])
+
     return results
+
+def testResultsPassed(results, consider_execution_result):
+    print "in testResultsPassed"
 
 
 if __name__ == '__main__' or __name__ == '__builtin__':

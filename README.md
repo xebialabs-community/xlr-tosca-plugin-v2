@@ -18,7 +18,7 @@ See the **XL Release Reference Manual** for background information on XL Release
 
 * **Requirements**
   * **XL Release** 7.5.0+
-  * **Tosca**
+  * **Tosca** 9.3
 
 # Installation #
 

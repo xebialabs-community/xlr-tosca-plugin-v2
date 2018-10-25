@@ -14,6 +14,8 @@ import datetime
 
 from com.tricentis.continuousintegration.toscacijavaclient import DexDispatcher
 from com.tricentis.continuousintegration.toscacijavaclient import Options
+from com.tricentis.continuousintegration.toscacijavaclient import ClientProperties
+from com.tricentis.continuousintegration.toscacixecution.utils import Util
 
 class ToscaClient(object):
 
@@ -43,9 +45,22 @@ class ToscaClient(object):
         print "Complete..."
 
         args = self._create_options(result_type, self.username, self.password, self.url, consider_execution_result)
+         
 
+        ClientProperties.LoadProperties()
+
+        
         options = Options(args)
         dispatcher = DexDispatcher.createDispatcher(options)
+        if isinstance(dispatcher, DexDispatcher):
+            if polling_interval and not Util.IsNullOrEmpty(str(polling_interval)):
+                pollingInMilli = int(polling_interval) * 1000
+                ClientProperties.setDexPollingInterval(str(pollingInMilli))
+            if client_timeout and not Util.IsNullOrEmpty(str(client_timeout)):
+                timeoutMilli = int(client_timeout) * 1000
+                ClientProperties.setCiClientTimeout(str(timeoutMilli))
+                
+
         dispatcher.Connect()
         dispatcher.Execute()
 
