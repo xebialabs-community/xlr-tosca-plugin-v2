@@ -18,7 +18,7 @@ See the **XL Release Reference Manual** for background information on XL Release
 
 * **Requirements**
   * **XL Release** 7.5.0+
-  * **Tosca**
+  * **Tosca** 11.3+
 
 # Installation #
 
@@ -65,15 +65,7 @@ In your SDLC templates, you can add a task of type **Tosca -> Execute** as shown
 
 ### Server ###
 
-The TOSCA Server that will run your tests.
-
-### Username ###
-
-Optionally override the username of the global server configuration.  You may want to do this if you have fine grained permissions on test execution.
-
-### Password ###
-
-Optionally override the password used for authentication.
+The TOSCA Server that will run your tests.  Example endpoint: http://<server>/DistributionServerService/ManagerService.svc
 
 ### Workspace ###
 
@@ -82,6 +74,16 @@ The TOSCA workspace that has the test events defined in the Test Configuration.
 ### Test Configuration ###
 
 XML representation of the Test Configuration.  See the TOSCA documentation for more information.
+
+Example:
+```
+<?xml version="1.0" encoding="utf-16" ?>
+<testConfiguration>
+    <TestEvents>
+        <TestEvent>SampleTestEvent</TestEvent>
+    </TestEvents>
+</testConfiguration>
+```
 
 ### Result Type ###
 
@@ -115,6 +117,4 @@ Build and package the plugins with...
 
 # TO DO #
 
-* Convert polling interval and timeout values to seconds.  Convert to milliseconds before calling the TOSCA server.
 * Implement 'Consider Exec Result' functionality in execute_test.py.  The client library implements this in main.java which we are not calling.
-* Update this file with the supported TOSCA version numbers (under Requirements)

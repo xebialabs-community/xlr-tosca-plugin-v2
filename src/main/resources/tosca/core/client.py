@@ -19,7 +19,6 @@ class ToscaClient(object):
 
     @staticmethod
     def new_instance(container):
-        print "in new_instance, url = ", container["url"]
         return ToscaClient(container["url"], container["username"], container["password"])
 
     def __init__(self, url, username, password):
@@ -32,28 +31,26 @@ class ToscaClient(object):
         self.result_filename = '%s/result.xml' % self.workdir
 
 
-    def execute(self, result_type, polling_interval, client_timeout, consider_execution_result, test_configuration):
+    def execute(self, polling_interval, client_timeout, consider_execution_result, test_configuration):
         if not test_configuration:
             raise Exception('Test Configuration cannot be empty.')
 
         # write config file
-        print "Writing test config to '%s'" % self.config_filename
         with open(self.config_filename, "w") as text_file:
             text_file.write(test_configuration)
-        print "Complete..."
 
-        args = self._create_options(result_type, self.username, self.password, self.url, consider_execution_result)
+        args = self._create_options('Junit', self.username, self.password, self.url, consider_execution_result)
 
         options = Options(args)
         dispatcher = DexDispatcher.createDispatcher(options)
+        print "connecting to tosca server..."
         dispatcher.Connect()
+        print "executing tests..."
         dispatcher.Execute()
 
         # read result file and return
-        print "Reading results from '%s'" % self.result_filename
         with open(self.result_filename, 'r') as myfile:
             results = myfile.read()
-        print "Complete..."
 
         return results
 

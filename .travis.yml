@@ -1,16 +1,12 @@
 language: java
-notifications:
-  hipchat:
-    rooms:
-      secure: NB4eDTi6gjZiWJdcL3raX6an9qFSYX7BxNJ0VG2Ui5W82XAbllzzJsp15g+P8iYH+WZQuNF/+ih0a7rmDdLbzGigmAwdPO8f/YVXtR61Vy5vnMyr/K+wLO+2ggndj+M3TAAHNTqGC73nqrQkSmcMVcF30qce4zbsntblJYBkL8vnKntEe/kSY8s9l7SrU39yQ2S5HxsrlC01mQ3R6rWGHsY04yieWrLiypaLERYfOImzAmalQm6liM2IuRn70JQ2StBIjKSO7diHEMoWV06hPf36895BrNN8nNc5Inw5epH9i8OO8/5S58XQSnqQ/nc8f3g4N0u3VWkQ2NPyFSRpD9GM6LKtrkyoxQO40kotIiym/R0oydUMKwqJPPEYcrBkfoHdDVy9jxiDaFALfDAtb/jJMijsj5TCu0XxTyHXss48qE3+v4Q/NNNKmsRsAxSQvZ27mwZYE5YRSPyRMP7uaVadW7Ql9nnZ8DaPSO8oxqFsabg+ibYS++QUoKoVRpp7NLrrj6zdEzJS0VmMkntUa7JqosIbI+3mAnXmW4k6lT+g/jyGID9GBT0ZSc4xh+FsM9VmTqxN5Wo1k/nmqqXMS+i/88EweSA3PTluRtE9zfxY0lPzBkSkjc1S2PZMsTBeR2vCM54pLhA7tKl3ot8r6WJUqoWCbWaXYEByeDj/OyY=
 deploy:
   provider: releases
   api_key:
     secure: 30zEQCv3gPbsnEb5cJg+jQf8/kUSmmmDmZOYvbxNsFSKoevaoLlhZnNXiQcpDhGYwMm8FV9oKprnAJWGz1xwnnC8xmJVjvKuZZVaTtXkNBm6CnxCiXPqWm5SAyLXKxGEdaUe0opJOhVbXHCKeeERZJQcclXL6z8CWWUSkmgryKlOqL9eqeV9+OoAgdqPH+LtbIzt/uL6WRXk49Y1y6n2JQI75Hwef3ODn/6Md9T7jIAe8WCVYDn7GUOTqBlpceJs+iI2Fd890zawpM6qJypwAvAV1vUSPrKRYk7eE8kLDMStM7l3gzpwMxYxhRyD64H3xLM4kvsXI+dJLs00V6DUt8PK08b3vyKSGzF+a4WsmSvcBiIhJ2U4p0n33/sd8yF8Q3adKcoWvQFsh3ByFigIKgvUEnkDERPw/ViBQpt7UGp7S3CQLpbO+djMqmNTMxNtQSqWHmG5Ht9EedW39ac+vDgIZjOKy0JXlVc+X8JfKDfKI/4eSzbLHjrwBl1BT49r8y+kX/22q9DcgTs4S6G+DbdAzVLpd7KQvMhCDoCwI6NAqfUpWsML+IU64nTFTwBLUj9io+u2jJWE+vqM3t6Ww7EA29wC51uzlXvg1hUpmPV4qBkV9wXi37wHFnpcMW6xKANcJ0h5mN/XvP4m+t/hdlLsyJrPzcIV1DMVjcDZMs0=
   file_glob: true
-  file: build/distributions/*
+  file: build/libs/xlr_tosca-plugin*.jar
   skip_cleanup: true
   on:
     all_branches: true
     tags: true
-    repo: xebialabs-community/xld-jira-plugin
+    repo: xebialabs-community/xlr-tosca-plugin

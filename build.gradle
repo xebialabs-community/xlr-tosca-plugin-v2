@@ -41,6 +41,10 @@ shadowJar {
       exclude(dependency('junit:junit:.*'))
    }
 }
+task pyTest(type: Exec) {
+    workingDir 'src/test'
+    commandLine 'python', '-m', 'unittest', 'discover'
+}
 
 license {
   header rootProject.file('License.md')
