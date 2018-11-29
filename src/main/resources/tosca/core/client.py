@@ -14,6 +14,8 @@ import datetime
 
 from com.tricentis.continuousintegration.toscacijavaclient import DexDispatcher
 from com.tricentis.continuousintegration.toscacijavaclient import Options
+from com.tricentis.continuousintegration.toscacijavaclient import ClientProperties
+from com.tricentis.continuousintegration.toscacixecution.utils import Util
 
 class ToscaClient(object):
 
@@ -41,6 +43,9 @@ class ToscaClient(object):
 
         args = self._create_options('Junit', self.username, self.password, self.url, consider_execution_result)
 
+        ClientProperties.LoadProperties()
+
+        
         options = Options(args)
         dispatcher = DexDispatcher.createDispatcher(options)
         print "connecting to tosca server..."
