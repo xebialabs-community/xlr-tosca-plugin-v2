@@ -6,7 +6,8 @@ deploy:
   provider: releases
   api_key:
     secure: Iv37hZGQqygFTj6uBR5ppotzkztoHVa4PAT8sdVoX3mCf2gvm5jQWg9GLLHRMW+H23ruy9+QC4jn7byC0Epvaod9R2v9Gs14Y+uwrQC0PG2KjYeQnrycWIdy60305XwVbl+xVbangpGYjDTWKCtovdep2RYkrE9lqgS0JQ7vDoE1qLumFD5TzcWf6KPCUQJk/kp7WCBoETFbv4H6urxmDhm0twtu/oCHTzY/Go4+Ng1DyZRJW48leUZuntO9SXBOezk1b0uP/C/2eVnMRxoknO3MJdIwX+BlPh5ppJLgSx8+Ra0UxjZE5+VUuDWJsA9g2iWhajwZ9yq6tuY+XOHrVad42BXdwOUqC/wwH32hW9wdAQ1bOUAWS0fwwIfhe1bm4xkz9kkLvEwO8AtEl8hX1dMVqvjFL0HN2rJlVnGehx75PHF6zNZL2wxzbEMcsITHQ1usZHdHFIuetdkIOBRAvTUoN54NoCwHJorzbk1MPZWCwj3haSeS2zVWjrVzrMEaMtTo07m1Xom+u1ZX7uDFTjBsl8V6UfVRFvIbRfF1miuz1hwunKD09vaXMAgtGul4FGT168+rpRBRgJrRXQPkCVHwMpZSsqCYTz0uei0GaRMOjK83GQ71swDBFfS8J9dZUREM2BUrj+CBSjX+WUxY0iOyB4EeU6ZuU1zmSTbesc8=
-  file: build\libs\*
+  file_glob: true
+  file: build/libs/*
   skip_cleanup: true
   on:
     tags: true
