@@ -4,11 +4,11 @@
 [![License: MIT][xlr-tosca-plugin-license-image]][xlr-tosca-plugin-license-url]
 ![Github All Releases][xlr-tosca-plugin-downloads-image]
 
-[xlr-tosca-plugin-travis-image]: https://travis-ci.org/xebialabs-community/xlr-tosca-plugin.svg?branch=master
-[xlr-tosca-plugin-travis-url]: https://travis-ci.org/xebialabs-community/xlr-tosca-plugin
+[xlr-tosca-plugin-travis-image]: https://travis-ci.org/xebialabs-community/xlr-tosca-plugin-v2.svg?branch=master
+[xlr-tosca-plugin-travis-url]: https://travis-ci.org/xebialabs-community/xlr-tosca-plugin-v2
 [xlr-tosca-plugin-license-image]: https://img.shields.io/badge/License-MIT-yellow.svg
 [xlr-tosca-plugin-license-url]: https://opensource.org/licenses/MIT
-[xlr-tosca-plugin-downloads-image]: https://img.shields.io/github/downloads/xebialabs-community/xlr-tosca-plugin/total.svg
+[xlr-tosca-plugin-downloads-image]: https://img.shields.io/github/downloads/xebialabs-community/xlr-tosca-plugin-v2/total.svg
 
 # Overview #
 
