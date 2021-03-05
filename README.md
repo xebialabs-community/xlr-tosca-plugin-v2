@@ -12,7 +12,7 @@
 
 # Overview #
 
-This plugin provides the ability to execute tests on a Tricentis Tosca server.
+This plugin provides the ability to execute tests on a Tricentis Tosca server. It is using the ToscaCIJavaClient.jar file to call TOSCA server for running junit and getting back results. [ Reference to Java Client Documentation](https://documentation.tricentis.com/en/1000/content/continuous_integration/execution.htm)
 
 See the **XL Release Reference Manual** for background information on XL Release and plugin concepts.
 
